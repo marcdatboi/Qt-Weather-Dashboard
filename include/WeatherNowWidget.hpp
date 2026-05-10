@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <QWidget>
-#include <QString>
 #include <QLabel>
+#include <QVBoxLayout>
 
 class WeatherNowWidget : public QWidget {
     Q_OBJECT
@@ -14,30 +13,38 @@ class WeatherNowWidget : public QWidget {
 public:
     WeatherNowWidget
     (
-        QString& locationName,
-        QString& pathToWeatherIcon, // Use forward slashes
+        QString &locationName,
+        QString &pathToWeatherIcon, // Use forward slashes
         int temperatureF,
         int precipitationChance,
         int windSpeedMPH,
-        char windDirection, // N = north, E = east, S = south, W = west
+        QChar windDirection, // N = north, E = east, S = south, W = west
         QWidget *parent = nullptr
     );
     ~WeatherNowWidget();
 
 private:
 
+    // Layouts
+    QVBoxLayout *centralLayout;
+    QHBoxLayout *centralWeatherInfoLayout;
+
     // Data
     const QString locationName;
-    const QString pathToWeatherIcon;
     int temperatureF;
     int precipitationChance;
     int windSpeedMPH;
-    char windDirection;
+    QChar windDirection;
 
     // Visuals
     QLabel *locationNameLabel;
-    QLabel *weatherDataLabel; // Contains temperature, precipitation chance, wind direction, and wind speed
-    QLabel *weatherIconLabel;
+    QLabel *currentTemperatureLabel;
+    QLabel *precipitationChanceLabel;
+    QLabel *windDirectionAndSpeedLabel;
+    QLabel *weatherNowIconLabel;
 
     void initWidget(); // Initializes the starting properties of the widget upon creation
+    void initLocationWidget();
+    void initWeatherInfo(); // Icon, Temperature, precipitation, wind direction, and wind speed
+
 };
