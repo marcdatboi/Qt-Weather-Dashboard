@@ -13,19 +13,19 @@ MainWindow::MainWindow(QWidget *parent)
     this->setupWindow();
 
     QString locationName = "Example Location";
-    QString weatherIconPath = "not/implemented/yet/lol";
     WeatherNowWidget *weatherHeaderWidget = new WeatherNowWidget
     (
         locationName,
-        weatherIconPath,
         32,
         50,
         16,
         'N',
+        25,
         this->centralWidget
     );
+    this->centralLayout->addStretch();
     this->centralLayout->addWidget(weatherHeaderWidget, 0, Qt::AlignCenter);
-    this->centralWidget->setStyleSheet("QWidget { border: 2px solid lime; }");
+    this->centralLayout->addStretch();
 }
 
 void MainWindow::setupWindow() {
@@ -35,6 +35,6 @@ void MainWindow::setupWindow() {
     this->centralWidget->setLayout(this->centralLayout);
 }
 
-// TODO: Figure out why the fuck your widget is in the goddamn corner
+// TODO: Start implementing the 7-day forecast
 
 MainWindow::~MainWindow() {}
